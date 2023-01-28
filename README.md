@@ -1,4 +1,4 @@
-#Valorant Agent Statistics Scraper
+#Valorats
 
 This project aims to gather competitive statistics of Valorant agents from the website https://thespike.gg using web scraping techniques. The collected data will include information such as pick rate of each agent in competitive play. The goal of the project is to provide valuable insights into the current meta and trends in the competitive Valorant scene.
 

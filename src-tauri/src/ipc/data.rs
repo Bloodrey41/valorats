@@ -5,8 +5,8 @@ use select::{document::Document, predicate::{Class, Name, Predicate, Attr, Any}}
 use crate::model::{data::Data, agent::{get_agent_role, Agent, Role}};
 
 #[tauri::command]
-pub fn get_data(url: impl Into<String>) -> Vec<Data> {
-    let html = reqwest::blocking::get(url.into()).unwrap().text().unwrap();
+pub fn get_data(url: &str) -> Vec<Data> {
+    let html = reqwest::blocking::get(url).unwrap().text().unwrap();
 
     let document = Document::from(html.as_str());
 
@@ -64,13 +64,23 @@ pub fn get_data(url: impl Into<String>) -> Vec<Data> {
         }
     }
 
-    let mut res = vec![];
-    
-    for x in data {
-        if !res.contains(&x) {
-            res.push(x);
+    let mut result: HashMap<String, Data> = HashMap::new();
+
+    for item in data {
+        let name = &item.agent.name;
+        if result.contains_key(name) {
+            let maps = &mut result.get_mut(name).unwrap().maps;
+            for (key, value) in &item.maps {
+                maps.entry(key.to_owned())
+                    .and_modify(|e| *e = f32::max(*e, *value))
+                    .or_insert(*value);
+                }
+        } else {
+            result.insert(name.to_owned(), item);
         }
     }
 
-    res
+    let result: Vec<Data> = result.values().cloned().collect();
+
+    result
 }

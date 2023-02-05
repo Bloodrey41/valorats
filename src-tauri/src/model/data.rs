@@ -1,15 +1,11 @@
 use std::collections::HashMap;
 
+use serde::Serialize;
+
 use super::agent::Agent;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Data {
     pub agent: Agent,
     pub maps: HashMap<String, f32>,
-}
-
-impl PartialEq for Data {
-    fn eq(&self, other: &Self) -> bool {
-        self.agent.name == other.agent.name
-    }
 }

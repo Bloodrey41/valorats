@@ -1,4 +1,6 @@
-#[derive(Debug, Clone)]
+use serde::Serialize;
+
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub enum Role {
     Duelist,
     Initiator,
@@ -6,7 +8,7 @@ pub enum Role {
     Sentinel,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Agent {
     pub name: String,
     pub picture: String,

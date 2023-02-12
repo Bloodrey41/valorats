@@ -49,10 +49,17 @@ pub fn get_data(url: &str) -> Vec<Data> {
 
                 let agent_role = get_agent_role(&agent_name);
 
+                let agent_picture = column
+                    .find(Name("img"))
+                    .next()
+                    .unwrap()
+                    .attr("src")
+                    .unwrap_or("");
+
                 agent_data.agent = Agent {
                     name: agent_name,
                     role: agent_role,
-                    picture: format!("https://www.thespike.gg{}", column.find(Name("img")).next().unwrap().attr("src").unwrap()),
+                    picture: format!("https://www.thespike.gg{}", agent_picture),
                 };
             } else {
                 let map = text.split('(').nth(0).unwrap();

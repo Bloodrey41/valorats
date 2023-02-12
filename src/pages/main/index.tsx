@@ -37,6 +37,7 @@ const Content: React.FC = () => {
     const maps = Object.keys(data[0].maps).map(map => map)
 
     const agents = data.map(row => row.agent.name)
+    console.log(data)
 
     return (
 	<>
@@ -66,6 +67,5 @@ const useData = () => {
 	getData().then(data => setData(data))
     }, [selectedEvent])
 
-    console.log(data)
     return data
 }

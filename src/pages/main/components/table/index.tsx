@@ -28,8 +28,8 @@ const Table: React.FC<Props> = ({ data, headers }) => {
     }
 
     return (
-	<table>
-	    <thead>
+	<table className='w-[calc(100%-20px)] m-2.5'>
+	    <thead className='capitalize'>
 		<tr>
 		    <th>Agent</th>
 		    {headers.filter(h => h.includes(selectedMap)).map(header => (
@@ -46,7 +46,11 @@ const Table: React.FC<Props> = ({ data, headers }) => {
 		    .map(row => (
 		    <tr key={row.agent.name}>
 			<td>
-			    <img src={row.agent.picture} alt={row.agent.name} />
+			    <img 
+				src={row.agent.picture}
+				alt={row.agent.name}
+				className='border border-solid border-neutral-500 rounded-full w-11 h-11'
+			    />
 			</td>
 			{headers.filter(h => h.includes(selectedMap)).map(header => (
 			    <td key={row.agent.name + header}>{row.maps[header]}%</td>

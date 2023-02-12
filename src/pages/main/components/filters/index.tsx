@@ -3,6 +3,8 @@ import useMapStore from '../../hooks/use-map-store'
 import useAgentStore from '../../hooks/use-agent-store'
 import useRoleStore from '../../hooks/use-role-store'
 
+import './style.css'
+
 const ROLES = ['Controller', 'Initiator', 'Duelist', 'Sentinel']
 
 type Props = {
@@ -28,7 +30,7 @@ const Filters: React.FC<Props> = ({ maps, agents }) => {
 	    <select 
 		onChange={handleMapChange}
 		value={selectedMap}
-		style={{ width: `calc(${selectsWidth}% - 20px)` }}
+		className={`w-[calc(${selectsWidth}%-20px)]`}
 	    >
 		<option value=''>Map</option>
 		{maps.map(map => (
@@ -38,7 +40,7 @@ const Filters: React.FC<Props> = ({ maps, agents }) => {
 	    {!selectedAgent && <select 
 		onChange={handleRoleChange} 
 		value={selectedRole}
-		style={{ width: `calc(${selectsWidth}% - 20px)` }}
+		className={`w-[calc(${selectsWidth}%-20px)]`}
 	    >
 		<option value=''>Role</option>
 		{ROLES.map(role => (
@@ -48,7 +50,7 @@ const Filters: React.FC<Props> = ({ maps, agents }) => {
 	    <select 
 		onChange={handleAgentChange}
 		value={selectedAgent} 
-		style={{ width: `calc(${selectsWidth}% - 20px)` }}
+		className={`w-[calc(${selectsWidth}%-20px)]`}
 	    >
 		<option value=''>Agent</option>
 		{agents.map(agent => (

@@ -1,6 +1,6 @@
 import create from 'zustand'
 
-const DEFAULT_EVENT = 'https://www.thespike.gg/events/stats/vct-2023-challengers-league-spain-rising-split-1/2267'
+const DEFAULT_EVENT = 'https://www.thespike.gg/events/stats/vct-2023-lock-in/1951'
 
 type EventState = {
     selectedEvent: string

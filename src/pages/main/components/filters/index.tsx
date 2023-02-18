@@ -3,8 +3,6 @@ import useMapStore from '../../hooks/use-map-store'
 import useAgentStore from '../../hooks/use-agent-store'
 import useRoleStore from '../../hooks/use-role-store'
 
-import './style.css'
-
 const ROLES = ['Controller', 'Initiator', 'Duelist', 'Sentinel']
 
 type Props = {
@@ -27,38 +25,53 @@ const Filters: React.FC<Props> = ({ maps, agents }) => {
     
     return (
 	<div className='filters'>
-	    <select 
+	    <Select
 		onChange={handleMapChange}
 		value={selectedMap}
-		className={`w-[calc(${selectsWidth}%-20px)]`}
-	    >
-		<option value=''>Map</option>
-		{maps.map(map => (
-		    <option value={map} key={map}>{map.charAt(0).toUpperCase() + map.slice(1)}</option>
-		))}
-	    </select>
-	    {!selectedAgent && <select 
-		onChange={handleRoleChange} 
+		label='Map'
+		options={maps}
+		width={selectsWidth}
+	    />
+	    {!selectedAgent ? <Select
+		onChange={handleRoleChange}
 		value={selectedRole}
-		className={`w-[calc(${selectsWidth}%-20px)]`}
-	    >
-		<option value=''>Role</option>
-		{ROLES.map(role => (
-		    <option value={role} key={role}>{role.charAt(0).toUpperCase() + role.slice(1)}</option>
-		))}
-	    </select>}
-	    <select 
+		label='Role'
+		options={ROLES}
+		width={selectsWidth}
+	    /> : null}
+	    <Select 
 		onChange={handleAgentChange}
 		value={selectedAgent} 
-		className={`w-[calc(${selectsWidth}%-20px)]`}
-	    >
-		<option value=''>Agent</option>
-		{agents.map(agent => (
-		    <option value={agent} key={agent}>{agent}</option>
-		))}
-	    </select>
+		label='Agent' 
+		options={agents} 
+		width={selectsWidth}
+	    />
 	</div>
     )
 }
 
 export default Filters
+
+type SelectProps = {
+    label: string
+    options: string[]
+    width: number
+}
+ 
+const Select: React.FC<SelectProps> = ({ label, width, options, ...props }) => {
+    console.log(width)
+    return (
+	<select 
+	    className='p-3 m-2.5 bg-neutral-600 border-2 border-solid border-neutral-600 rounded text-base text-red-600' 
+	    style={{ width: `calc(${width}% - 20px)` }} 
+	    {...props}
+	>
+	    <option value=''>{label}</option>
+	    {options.map(option => (
+		<option key={option} value={option}>
+		    {option.charAt(0).toUpperCase() + option.slice(1)}
+		    </option>
+	    ))}
+	</select>
+    )
+}

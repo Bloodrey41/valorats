@@ -64,7 +64,7 @@ pub fn get_data(url: &str) -> Vec<Data> {
             } else {
                 let map = text.split('(').nth(0).unwrap();
                 let map = map.replace("%", "");
-                agent_data.maps.insert(header.to_owned(), map.parse::<f32>().unwrap());
+                agent_data.maps.insert(header.to_owned(), map.parse::<f32>().unwrap().round());
             }
 
             data.push(agent_data.clone())

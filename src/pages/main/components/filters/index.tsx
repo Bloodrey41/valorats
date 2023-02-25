@@ -22,25 +22,25 @@ const Filters: React.FC<Props> = ({ maps, agents }) => {
     const handleAgentChange = (e: React.ChangeEvent<HTMLSelectElement>) => setSelectedAgent(e.target.value)
 
     const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRole(e.target.value)
-    
+
     return (
 	<div className='filters'>
-	    <Select
-		onChange={handleMapChange}
+	    {/*@ts-ignore*/}
+	    <Select onChange={handleMapChange}
 		value={selectedMap}
 		label='Map'
 		options={maps}
 		width={selectsWidth}
 	    />
-	    {!selectedAgent ? <Select
-		onChange={handleRoleChange}
+	    {/*@ts-ignore*/}
+	    {!selectedAgent ? <Select onChange={handleRoleChange}
 		value={selectedRole}
 		label='Role'
 		options={ROLES}
 		width={selectsWidth}
 	    /> : null}
-	    <Select 
-		onChange={handleAgentChange}
+	    {/*@ts-ignore*/}
+	    <Select onChange={handleAgentChange}
 		value={selectedAgent} 
 		label='Agent' 
 		options={agents} 
@@ -57,7 +57,7 @@ type SelectProps = {
     options: string[]
     width: number
 }
- 
+
 const Select: React.FC<SelectProps> = ({ label, width, options, ...props }) => {
     console.log(width)
     return (
@@ -70,7 +70,7 @@ const Select: React.FC<SelectProps> = ({ label, width, options, ...props }) => {
 	    {options.map(option => (
 		<option key={option} value={option}>
 		    {option.charAt(0).toUpperCase() + option.slice(1)}
-		    </option>
+		</option>
 	    ))}
 	</select>
     )

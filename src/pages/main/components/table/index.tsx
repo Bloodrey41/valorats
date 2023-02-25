@@ -16,15 +16,17 @@ const Table: React.FC<Props> = ({ data, headers }) => {
     const sort = (a: IData, b: IData) => {
 	const key = selectedMap ? selectedMap : 'all'
 
+	//@ts-ignore
 	const aValue = Number(a.maps[key])
 
+	//@ts-ignore
 	const bValue = Number(b.maps[key])
 
 	if (aValue > bValue) return -1
 
-	if (aValue < bValue) return 1
+	    if (aValue < bValue) return 1
 
-	return 0
+		return 0
     }
 
     return (
@@ -44,26 +46,29 @@ const Table: React.FC<Props> = ({ data, headers }) => {
 		    .filter(r => selectedAgent ? r.agent.name.includes(selectedAgent) : r.agent.role.includes(selectedRole))
 		    .sort(sort)
 		    .map(row => (
-		    <tr key={row.agent.name}>
-			<td className='border border-solid border border-neutral-500 p-2.5 m-0 text-center'>
-			    {/*
-			      *<img 
-			      *    src={row.agent.picture}
-			      *    alt={row.agent.name}
-			      *    className='border border-solid border-neutral-500 rounded-full w-11 h-11'
-			      *>
-			      */}
-			    {row.agent.name}
-			</td>
-			{headers.filter(h => h.includes(selectedMap)).map(header => (
-			    <td key={row.agent.name + header} className='border border-solid border border-neutral-500 p-2.5 m-0 text-center'>
-				{row.maps[(header)]}%
+			<tr key={row.agent.name}>
+			    <td className='border border-solid border border-neutral-500 p-2.5 m-0 text-center'>
+				{/*
+				  *<img 
+				  *    src={row.agent.picture}
+				  *    alt={row.agent.name}
+				  *    className='border border-solid border-neutral-500 rounded-full w-11 h-11'
+				  *>
+				  */}
+				{row.agent.name}
+			    </td>
+			    {headers.filter(h => h.includes(selectedMap)).map(header => (
+				<td key={row.agent.name + header} className='border border-solid border border-neutral-500 p-2.5 m-0 text-center'>
+				    {
+					//@ts-ignore
+					row.maps[(header)]
+				    }%
 				</td>
-			))}
-		    </tr>
-		))}
+			    ))}
+			</tr>
+		    ))}
 	    </tbody>
-	</table>
+	    </table>
     )
 }
 
